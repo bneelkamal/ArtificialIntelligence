@@ -1,6 +1,6 @@
 # Optimal Meetup Location Search
 
-This project tackles a pathfinding problem to determine the best meeting district for two friends traveling from **Pune, Maharashtra** and **Bangalore, Karnataka**. The solution models India's districts as a graph and compares the performance of **Greedy Best-First Search (GBFS)** and **A*** search algorithms[1]. Each algorithm is tested with two distinct heuristics to find the meeting point that minimizes the simultaneous travel time for both friends[1][2].
+This project tackles a pathfinding problem to determine the best meeting district for two friends traveling from **Pune, Maharashtra** and **Bangalore, Karnataka**. The solution models India's districts as a graph and compares the performance of **Greedy Best-First Search (GBFS)** and **A*** search algorithms. Each algorithm is tested with two distinct heuristics to find the meeting point that minimizes the simultaneous travel time for both friends.
 
 ## 1. Methodology
 The problem is modeled as a graph search where a "state" is the pair of current locations for both friends. The search aims to find a goal state where both friends are in the same district.
@@ -11,16 +11,16 @@ The map of India is represented as a graph where:
 *   **Edges**: Connect geographically adjacent districts. Adjacency is determined using a **spatial join**.
 *   **Weights**: Represent travel time, estimated as `2 * Haversine distance` between the **centroids** of connected districts.
 
-> **Spatial Join:** A technique in GIS that combines datasets based on spatial relationships. I used `geopandas.sjoin` with the `"touches"` predicate to identify neighbouring districts that share a boundary. This established the connections (edges) in the graph, ensuring geographic accuracy[1].
+> **Spatial Join:** A technique in GIS that combines datasets based on spatial relationships. I used `geopandas.sjoin` with the `"touches"` predicate to identify neighbouring districts that share a boundary. This established the connections (edges) in the graph, ensuring geographic accuracy.
 >
-> **Centroid Usage:** The geometric center of a district’s shape. By reducing complex district polygons to single centroid points, I enabled straightforward distance calculations using the Haversine formula, which was critical for estimating travel times efficiently[1].
+> **Centroid Usage:** The geometric center of a district’s shape. By reducing complex district polygons to single centroid points, I enabled straightforward distance calculations using the Haversine formula, which was critical for estimating travel times efficiently.
 
 ### Search Algorithms and Heuristics
 I implemented two search algorithms (GBFS and A*) and two heuristics to guide them.
 
-> **Main Heuristic:** For a state (A, B), this heuristic finds the minimum possible time until they meet. It considers all possible meeting points M and calculates the maximum travel time from A to M or B to M (since both friends travel at the same time), then takes the smallest of these values. It uses pre-computed shortest paths (via Dijkstra's algorithm) for accuracy[1].
+> **Main Heuristic:** For a state (A, B), this heuristic finds the minimum possible time until they meet. It considers all possible meeting points M and calculates the maximum travel time from A to M or B to M (since both friends travel at the same time), then takes the smallest of these values. It uses pre-computed shortest paths (via Dijkstra's algorithm) for accuracy.
 >
-> **Euclidean Heuristic:** A simpler estimate based on the straight-line (Haversine) distance between the friends’ current districts. It’s quick to compute but less accurate as it doesn’t account for the actual road network[1].
+> **Euclidean Heuristic:** A simpler estimate based on the straight-line (Haversine) distance between the friends’ current districts. It’s quick to compute but less accurate as it doesn’t account for the actual road network.
 
 ## 2. How to Run the Search
 
