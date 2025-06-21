@@ -47,7 +47,7 @@ The performance of each algorithm and heuristic combination was measured. A* sea
 | A* with Euclidean Heuristic |
 | GBFS with Euclidean Heuristic |
 
-**Observations:
+**Observations:**
 *   **Path Quality**: A* found the optimal meeting point (Haveri) with a lower total cost than the suboptimal paths found by GBFS.
 *   **Heuristic Impact**: The main heuristic was far more effective at guiding the search, resulting in significantly fewer nodes being explored and faster execution times compared to the less-informed Euclidean heuristic.
 
